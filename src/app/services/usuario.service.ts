@@ -15,7 +15,16 @@ export class UsuarioService {
               ) { }
 
   getUsers() {
-    return this.http.get(`${this.url}/users?per_page=6`)
+    return this.http.get(`${this.url}/users?per_page=6&delay=5`) // &delay=3; espera 3segundos para empezar a cargar informacon
+            .pipe(
+              map( (resp:any) => 
+                resp['data']
+              )
+            )
+  }
+
+  getUserById( id: string ) {
+    return this.http.get(`${this.url}/users/${id}`) // &delay=3; espera 3segundos para empezar a cargar informacon
             .pipe(
               map( (resp:any) => 
                 resp['data']
